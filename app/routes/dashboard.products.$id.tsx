@@ -6,7 +6,7 @@ import { HashDisplay } from "~/components/HashDisplay";
 import { TrackingTimeline } from "~/components/TrackingTimeline";
 import { Modal } from "~/components/Modal";
 import { ClientOnly } from "~/components/ClientOnly";
-import { supabase } from "~/lib/supabase.server";
+import { supabase } from "~/lib/supabase.client";
 import { generateEventHash } from "~/lib/hash";
 
 const TrackingMap = lazy(() => import("~/components/TrackingMap.client"));
@@ -17,7 +17,7 @@ export function meta() {
     return [{ title: "Detalhe do Produto — ChainTrack" }];
 }
 
-export async function loader({ params }: Route.LoaderArgs) {
+export async function clientLoader({ params }: Route.ClientLoaderArgs) {
     const { data: product } = await supabase
         .from("produtos")
         .select("*, responsavel:profiles(nome)")
@@ -37,7 +37,7 @@ export async function loader({ params }: Route.LoaderArgs) {
     return { product, events: events || [] };
 }
 
-export async function action({ request, params }: Route.ActionArgs) {
+export async function clientAction({ request, params }: Route.ClientActionArgs) {
     const formData = await request.formData();
     const estado = formData.get("estado") as string;
     const localizacao = formData.get("localizacao") as string;
@@ -80,7 +80,7 @@ const estadoOptions = [
 ];
 
 export default function ProductDetailPage() {
-    const { product, events } = useLoaderData<typeof loader>();
+    const { product, events } = useLoaderData<typeof clientLoader>();
     const actionData = useActionData<{ error?: string; success?: string }>();
     const [modalOpen, setModalOpen] = useState(false);
 

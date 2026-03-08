@@ -4,7 +4,7 @@ import { QRCodeSVG } from "qrcode.react";
 import { Suspense, lazy } from "react";
 import { TrackingTimeline } from "~/components/TrackingTimeline";
 import { ClientOnly } from "~/components/ClientOnly";
-import { supabase } from "~/lib/supabase.server";
+import { supabase } from "~/lib/supabase.client";
 import type { Route } from "./+types/track.$hash";
 
 const TrackingMap = lazy(() => import("~/components/TrackingMap.client"));
@@ -13,7 +13,7 @@ export function meta() {
     return [{ title: "Rastreio de Produto — ChainTrack" }];
 }
 
-export async function loader({ params }: Route.LoaderArgs) {
+export async function clientLoader({ params }: Route.ClientLoaderArgs) {
     const hash = params.hash;
 
     // Demo mode
@@ -63,7 +63,7 @@ function getStatusIcon(estado: string) {
 }
 
 export default function PublicTrackingPage() {
-    const { product, events, isDemo } = useLoaderData<typeof loader>();
+    const { product, events, isDemo } = useLoaderData<typeof clientLoader>();
 
     return (
         <div className="min-h-screen px-4 py-8" style={{ background: "var(--color-bg-primary)" }}>

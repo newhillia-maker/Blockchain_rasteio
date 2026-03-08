@@ -1,7 +1,7 @@
 import { useLoaderData, Form, useActionData, useNavigation } from "react-router";
 import { FiHome, FiPlus, FiTrash2, FiMapPin, FiBox } from "react-icons/fi";
 import { useState } from "react";
-import { supabase } from "~/lib/supabase.server";
+import { supabase } from "~/lib/supabase.client";
 import { Modal } from "~/components/Modal";
 import type { Route } from "./+types/dashboard.hubs";
 
@@ -9,7 +9,7 @@ export function meta() {
     return [{ title: "Centros de Distribuição — ChainTrack" }];
 }
 
-export async function loader({ }: Route.LoaderArgs) {
+export async function clientLoader({ }: Route.ClientLoaderArgs) {
     const { data: centros } = await supabase
         .from("centros_distribuicao")
         .select("*")
@@ -18,7 +18,7 @@ export async function loader({ }: Route.LoaderArgs) {
     return { centros: centros || [] };
 }
 
-export async function action({ request }: Route.ActionArgs) {
+export async function clientAction({ request }: Route.ClientActionArgs) {
     const formData = await request.formData();
     const intent = formData.get("intent");
 
@@ -51,7 +51,7 @@ export async function action({ request }: Route.ActionArgs) {
 }
 
 export default function HubsPage() {
-    const { centros } = useLoaderData<typeof loader>();
+    const { centros } = useLoaderData<typeof clientLoader>();
     const actionData = useActionData<{ error?: string; success?: string }>();
     const navigation = useNavigation();
     const isSubmitting = navigation.state === "submitting";

@@ -1,0 +1,221 @@
+﻿node.exe : npm verbose 
+cli C:\Program 
+Files\nodejs\node.exe 
+C:\Program Files\nodejs\no
+de_modules\npm\bin\npm-cli
+.js
+At line:1 char:1
++ & "C:\Program 
+Files\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo        
+      : NotSpecified: (n  
+  pm verbose cli...\bin   
+ \npm-cli.js:String) [    
+], RemoteException
+    + FullyQualifiedError 
+   Id : NativeCommandErr  
+  or
+ 
+npm info using npm@11.8.0
+npm info using 
+node@v24.13.1
+npm verbose title npm run 
+build
+npm verbose argv "run" 
+"build" "--loglevel" 
+"verbose"
+npm verbose logfile 
+logs-max:10 dir:C:\Users\N
+ilton\AppData\Local\npm-ca
+che\_logs\2026-03-08T21_53
+_41_807Z-
+npm verbose logfile C:\Use
+rs\Nilton\AppData\Local\np
+m-cache\_logs\2026-03-08T2
+1_53_41_807Z-debug-0.log
+
+> build
+> react-router build
+
+[36mvite v7.3.1 [32mbuilding client environment for production...[36m[39m
+transforming...
+[32mÔ£ô[39m 31 modules transformed.
+[31mÔ£ù[39m Build 
+failed in 496ms
+[31m[react-router:route-e
+xports] SPA Mode: 1 
+invalid route export(s) 
+in 
+`routes/dashboard.tsx`: 
+`loader`. See https://reac
+trouter.com/how-to/spa 
+for more information.[39m
+file: [36mC:/Users/Nilton
+/.gemini/antigravity/scrat
+ch/plataforma-rateio/app/r
+outes/dashboard.tsx[39m
+    at Object.transform (C
+:\Users\Nilton\.gemini\ant
+igravity\scratch\plataform
+a-rateio\node_modules\@rea
+ct-router\dev\dist\vite.js
+:3957:19)
+    at Object.handler (fil
+e:///C:/Users/Nilton/.gemi
+ni/antigravity/scratch/pla
+taforma-rateio/node_module
+s/vite/dist/node/chunks/co
+nfig.js:33730:13)
+    at file:///C:/Users/Ni
+lton/.gemini/antigravity/s
+cratch/plataforma-rateio/n
+ode_modules/rollup/dist/es
+/shared/node-entry.js:2257
+1:40
+    at 
+processTicksAndRejections 
+(node:internal/process/tas
+k_queues:103:5) {
+  code: 'PLUGIN_ERROR',
+  plugin: 'react-router:ro
+ute-exports',
+  hook: 'transform',
+  id: 'C:/Users/Nilton/.ge
+mini/antigravity/scratch/p
+lataforma-rateio/app/route
+s/dashboard.tsx',
+  watchFiles: [
+    'C:\\Users\\Nilton\\.g
+emini\\antigravity\\scratc
+h\\plataforma-rateio\\pack
+age.json',
+    'C:/Users/Nilton/.gemi
+ni/antigravity/scratch/pla
+taforma-rateio/node_module
+s/@react-router/dev/dist/c
+onfig/defaults/entry.clien
+t.tsx',
+    'C:/Users/Nilton/.gemi
+ni/antigravity/scratch/pla
+taforma-rateio/app/root.ts
+x',
+    'C:/Users/Nilton/.gemi
+ni/antigravity/scratch/pla
+taforma-rateio/app/routes/
+_index.tsx',
+    'C:/Users/Nilton/.gemi
+ni/antigravity/scratch/pla
+taforma-rateio/app/routes/
+auth.login.tsx',
+    'C:/Users/Nilton/.gemi
+ni/antigravity/scratch/pla
+taforma-rateio/app/routes/
+auth.register.tsx',
+    'C:/Users/Nilton/.gemi
+ni/antigravity/scratch/pla
+taforma-rateio/app/routes/
+auth.logout.tsx',
+    'C:/Users/Nilton/.gemi
+ni/antigravity/scratch/pla
+taforma-rateio/app/routes/
+track.$hash.tsx',
+    'C:/Users/Nilton/.gemi
+ni/antigravity/scratch/pla
+taforma-rateio/app/routes/
+dashboard.tsx',
+    'C:/Users/Nilton/.gemi
+ni/antigravity/scratch/pla
+taforma-rateio/app/routes/
+dashboard._index.tsx',
+    'C:/Users/Nilton/.gemi
+ni/antigravity/scratch/pla
+taforma-rateio/app/routes/
+dashboard.users.tsx',
+    'C:/Users/Nilton/.gemi
+ni/antigravity/scratch/pla
+taforma-rateio/app/routes/
+dashboard.products.tsx',
+    'C:/Users/Nilton/.gemi
+ni/antigravity/scratch/pla
+taforma-rateio/app/routes/
+dashboard.products.$id.tsx
+',
+    'C:/Users/Nilton/.gemi
+ni/antigravity/scratch/pla
+taforma-rateio/app/routes/
+dashboard.planning.tsx',
+    'C:/Users/Nilton/.gemi
+ni/antigravity/scratch/pla
+taforma-rateio/app/routes/
+dashboard.acompanhamento.t
+sx',
+    'C:/Users/Nilton/.gemi
+ni/antigravity/scratch/pla
+taforma-rateio/app/routes/
+dashboard.hubs.tsx',
+    'C:/Users/Nilton/.gemi
+ni/antigravity/scratch/pla
+taforma-rateio/app/routes/
+dashboard.scan.tsx',
+    'C:/Users/Nilton/.gemi
+ni/antigravity/scratch/pla
+taforma-rateio/node_module
+s/react/jsx-runtime.js',
+    'C:/Users/Nilton/.gemi
+ni/antigravity/scratch/pla
+taforma-rateio/node_module
+s/react-dom/client.js',
+    'C:/Users/Nilton/.gemi
+ni/antigravity/scratch/pla
+taforma-rateio/node_module
+s/react/index.js',
+    'C:/Users/Nilton/.gemi
+ni/antigravity/scratch/pla
+taforma-rateio/node_module
+s/react-router/dist/develo
+pment/dom-export.mjs',
+    'C:/Users/Nilton/.gemi
+ni/antigravity/scratch/pla
+taforma-rateio/node_module
+s/react/cjs/react-jsx-runt
+ime.production.js',
+    'C:/Users/Nilton/.gemi
+ni/antigravity/scratch/pla
+taforma-rateio/node_module
+s/react/cjs/react.producti
+on.js',
+    'C:/Users/Nilton/.gemi
+ni/antigravity/scratch/pla
+taforma-rateio/node_module
+s/react-dom/index.js',
+    'C:/Users/Nilton/.gemi
+ni/antigravity/scratch/pla
+taforma-rateio/node_module
+s/react-router/dist/develo
+pment/chunk-FNSCYPCZ.mjs',
+    'C:/Users/Nilton/.gemi
+ni/antigravity/scratch/pla
+taforma-rateio/node_module
+s/react-router/dist/develo
+pment/chunk-EPOLDU6W.mjs',
+    'C:/Users/Nilton/.gemi
+ni/antigravity/scratch/pla
+taforma-rateio/node_module
+s/react-dom/cjs/react-dom-
+client.production.js'
+  ]
+}
+npm verbose cwd C:\Users\N
+ilton\.gemini\antigravity\
+scratch\plataforma-rateio
+npm verbose os Windows_NT 
+10.0.26100
+npm verbose node v24.13.1
+npm verbose npm  v11.8.0
+npm verbose exit 1
+npm verbose code 1

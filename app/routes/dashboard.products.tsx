@@ -3,7 +3,7 @@ import { FiPlus, FiEdit2, FiTrash2, FiBox, FiEye, FiSearch } from "react-icons/f
 import { useState } from "react";
 import { Modal } from "~/components/Modal";
 import { HashDisplay } from "~/components/HashDisplay";
-import { supabase } from "~/lib/supabase.server";
+import { supabase } from "~/lib/supabase.client";
 import { generateProductHash } from "~/lib/hash";
 import type { Route } from "./+types/dashboard.products";
 
@@ -11,7 +11,7 @@ export function meta() {
     return [{ title: "Produtos — ChainTrack" }];
 }
 
-export async function loader({ }: Route.LoaderArgs) {
+export async function clientLoader({ }: Route.ClientLoaderArgs) {
     const { data, error } = await supabase
         .from("produtos")
         .select("*, responsavel:profiles(nome)")
@@ -20,7 +20,7 @@ export async function loader({ }: Route.LoaderArgs) {
     return { products: data || [], error: error?.message };
 }
 
-export async function action({ request }: Route.ActionArgs) {
+export async function clientAction({ request }: Route.ClientActionArgs) {
     const formData = await request.formData();
     const intent = formData.get("intent") as string;
 
@@ -114,7 +114,7 @@ function getStatusBadge(estado: string) {
 }
 
 export default function ProductsPage() {
-    const { products } = useLoaderData<typeof loader>();
+    const { products } = useLoaderData<typeof clientLoader>();
     const actionData = useActionData<{ error?: string; success?: string }>();
     const navigation = useNavigation();
     const [modalOpen, setModalOpen] = useState(false);

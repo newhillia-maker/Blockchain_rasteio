@@ -1,13 +1,13 @@
 import { Form, Link, redirect, useActionData } from "react-router";
 import { FiBox, FiMail, FiLock, FiUser } from "react-icons/fi";
-import { supabase } from "~/lib/supabase.server";
+import { supabase } from "~/lib/supabase.client";
 import type { Route } from "./+types/auth.register";
 
 export function meta() {
     return [{ title: "Criar Conta — ChainTrack" }];
 }
 
-export async function action({ request }: Route.ActionArgs) {
+export async function clientAction({ request }: Route.ClientActionArgs) {
     const formData = await request.formData();
     const nome = formData.get("nome") as string;
     const email = formData.get("email") as string;

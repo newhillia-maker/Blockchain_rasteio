@@ -2,19 +2,19 @@ import { useLoaderData, Form, useActionData, useNavigation } from "react-router"
 import { FiPlus, FiEdit2, FiTrash2, FiUsers } from "react-icons/fi";
 import { useState } from "react";
 import { Modal } from "~/components/Modal";
-import { supabase } from "~/lib/supabase.server";
+import { supabase } from "~/lib/supabase.client";
 import type { Route } from "./+types/dashboard.users";
 
 export function meta() {
     return [{ title: "Utilizadores — ChainTrack" }];
 }
 
-export async function loader({ }: Route.LoaderArgs) {
+export async function clientLoader({ }: Route.ClientLoaderArgs) {
     const { data, error } = await supabase.from("profiles").select("*").order("created_at", { ascending: false });
     return { users: data || [], error: error?.message };
 }
 
-export async function action({ request }: Route.ActionArgs) {
+export async function clientAction({ request }: Route.ClientActionArgs) {
     const formData = await request.formData();
     const intent = formData.get("intent") as string;
 
@@ -57,7 +57,7 @@ export async function action({ request }: Route.ActionArgs) {
 }
 
 export default function UsersPage() {
-    const { users } = useLoaderData<typeof loader>();
+    const { users } = useLoaderData<typeof clientLoader>();
     const actionData = useActionData<{ error?: string; success?: string }>();
     const navigation = useNavigation();
     const [modalOpen, setModalOpen] = useState(false);

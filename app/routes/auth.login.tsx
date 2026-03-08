@@ -1,13 +1,13 @@
 import { Form, Link, redirect, useActionData } from "react-router";
 import { FiBox, FiMail, FiLock } from "react-icons/fi";
-import { supabase } from "~/lib/supabase.server";
+import { supabase } from "~/lib/supabase.client";
 import type { Route } from "./+types/auth.login";
 
 export function meta() {
     return [{ title: "Login — ChainTrack" }];
 }
 
-export async function action({ request }: Route.ActionArgs) {
+export async function clientAction({ request }: Route.ClientActionArgs) {
     const formData = await request.formData();
     const email = formData.get("email") as string;
     const password = formData.get("password") as string;

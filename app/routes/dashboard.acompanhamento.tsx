@@ -1,13 +1,13 @@
 import { useLoaderData, Link } from "react-router";
 import { FiActivity, FiSearch, FiExternalLink, FiHash } from "react-icons/fi";
-import { supabase } from "~/lib/supabase.server";
+import { supabase } from "~/lib/supabase.client";
 import { HashDisplay } from "~/components/HashDisplay";
 
 export function meta() {
     return [{ title: "Acompanhamento Geral — ChainTrack" }];
 }
 
-export async function loader() {
+export async function clientLoader() {
     // Buscar todos os produtos ordenados pelos atualizados mais recentemente
     const { data: produtos, error } = await supabase
         .from("produtos")
@@ -31,7 +31,7 @@ export async function loader() {
 }
 
 export default function AcompanhamentoPage() {
-    const { produtos } = useLoaderData<typeof loader>();
+    const { produtos } = useLoaderData<typeof clientLoader>();
 
     // Helper para determinar a cor do badge de estado
     const getStateColor = (estado: string) => {

@@ -1,15 +1,15 @@
 import { Outlet, useLoaderData } from "react-router";
 import { Sidebar } from "~/components/Sidebar";
-import { supabase } from "~/lib/supabase.server";
+import { supabase } from "~/lib/supabase.client";
 import type { Route } from "./+types/dashboard";
 
-export async function loader({ }: Route.LoaderArgs) {
+export async function clientLoader({ }: Route.ClientLoaderArgs) {
     const { data: { user } } = await supabase.auth.getUser();
     return { userEmail: user?.email || "" };
 }
 
 export default function DashboardLayout() {
-    const { userEmail } = useLoaderData<typeof loader>();
+    const { userEmail } = useLoaderData<typeof clientLoader>();
 
     return (
         <div className="min-h-screen" style={{ background: "var(--color-bg-primary)" }}>

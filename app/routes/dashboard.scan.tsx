@@ -1,7 +1,7 @@
 import { Form, useActionData, useNavigation } from "react-router";
 import { FiCamera, FiHash, FiSearch } from "react-icons/fi";
 import { useState } from "react";
-import { supabase } from "~/lib/supabase.server";
+import { supabase } from "~/lib/supabase.client";
 import { generateEventHash } from "~/lib/hash";
 import type { Route } from "./+types/dashboard.scan";
 
@@ -9,7 +9,7 @@ export function meta() {
     return [{ title: "Scanner QR — ChainTrack" }];
 }
 
-export async function action({ request }: Route.ActionArgs) {
+export async function clientAction({ request }: Route.ClientActionArgs) {
     const formData = await request.formData();
     const intent = formData.get("intent") as string;
 

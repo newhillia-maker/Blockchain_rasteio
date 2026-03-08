@@ -1,11 +1,11 @@
 import { redirect } from "react-router";
-import { supabase } from "~/lib/supabase.server";
+import { supabase } from "~/lib/supabase.client";
 
-export async function action() {
+export async function clientAction() {
     await supabase.auth.signOut();
     return redirect("/");
 }
 
-export async function loader() {
+export async function clientLoader() {
     return redirect("/");
 }

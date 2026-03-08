@@ -1,14 +1,14 @@
 import { useLoaderData } from "react-router";
 import { FiBox, FiUsers, FiActivity, FiTrendingUp } from "react-icons/fi";
 import { StatsCard } from "~/components/StatsCard";
-import { supabase } from "~/lib/supabase.server";
+import { supabase } from "~/lib/supabase.client";
 import type { Route } from "./+types/dashboard._index";
 
 export function meta() {
     return [{ title: "Dashboard — ChainTrack" }];
 }
 
-export async function loader({ }: Route.LoaderArgs) {
+export async function clientLoader({ }: Route.ClientLoaderArgs) {
     const [produtosRes, usersRes, eventsRes] = await Promise.all([
         supabase.from("produtos").select("*", { count: "exact", head: true }),
         supabase.from("profiles").select("*", { count: "exact", head: true }),
@@ -38,7 +38,7 @@ function getStatusBadge(estado: string) {
 }
 
 export default function DashboardIndex() {
-    const { totalProdutos, totalUsers, totalEvents, recentProducts } = useLoaderData<typeof loader>();
+    const { totalProdutos, totalUsers, totalEvents, recentProducts } = useLoaderData<typeof clientLoader>();
 
     return (
         <div className="space-y-8 animate-fade-in">

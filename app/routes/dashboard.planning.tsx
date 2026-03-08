@@ -1,14 +1,14 @@
 import { useLoaderData, Form, useActionData, useNavigation } from "react-router";
 import { FiMap, FiPlus, FiTrash2, FiSave, FiBox, FiUser } from "react-icons/fi";
 import { useState } from "react";
-import { supabase } from "~/lib/supabase.server";
+import { supabase } from "~/lib/supabase.client";
 import type { Route } from "./+types/dashboard.planning";
 
 export function meta() {
     return [{ title: "Planeamento de Rota — ChainTrack" }];
 }
 
-export async function loader({ }: Route.LoaderArgs) {
+export async function clientLoader({ }: Route.ClientLoaderArgs) {
     // Fetch profiles (responsáveis)
     const { data: users } = await supabase
         .from("profiles")
@@ -25,7 +25,7 @@ export async function loader({ }: Route.LoaderArgs) {
     return { users: users || [], products: products || [] };
 }
 
-export async function action({ request }: Route.ActionArgs) {
+export async function clientAction({ request }: Route.ClientActionArgs) {
     const formData = await request.formData();
 
     const produto_id = formData.get("produto_id") as string;
@@ -57,7 +57,7 @@ export async function action({ request }: Route.ActionArgs) {
 }
 
 export default function PlanningPage() {
-    const { users, products } = useLoaderData<typeof loader>();
+    const { users, products } = useLoaderData<typeof clientLoader>();
     const actionData = useActionData<{ error?: string; success?: string }>();
     const navigation = useNavigation();
     const isSubmitting = navigation.state === "submitting";
