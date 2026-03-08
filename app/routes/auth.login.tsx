@@ -1,0 +1,121 @@
+import { Form, Link, redirect, useActionData } from "react-router";
+import { FiBox, FiMail, FiLock } from "react-icons/fi";
+import { supabase } from "~/lib/supabase.server";
+import type { Route } from "./+types/auth.login";
+
+export function meta() {
+    return [{ title: "Login — ChainTrack" }];
+}
+
+export async function action({ request }: Route.ActionArgs) {
+    const formData = await request.formData();
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    if (!email || !password) {
+        return { error: "Preencha todos os campos." };
+    }
+
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+    if (error) {
+        return { error: "Credenciais inválidas. Tente novamente." };
+    }
+
+    return redirect("/dashboard");
+}
+
+export default function LoginPage() {
+    const actionData = useActionData<{ error?: string }>();
+
+    return (
+        <div
+            className="min-h-screen flex items-center justify-center px-6"
+            style={{ background: "var(--color-bg-primary)" }}
+        >
+            <div className="w-full max-w-md">
+                {/* Logo */}
+                <div className="flex items-center gap-3 justify-center mb-8">
+                    <div
+                        className="w-12 h-12 rounded-xl flex items-center justify-center animate-pulse-glow"
+                        style={{
+                            background: "linear-gradient(135deg, var(--color-accent), var(--color-accent-light))",
+                        }}
+                    >
+                        <FiBox size={24} color="white" />
+                    </div>
+                    <h1 className="text-2xl font-bold gradient-text">ChainTrack</h1>
+                </div>
+
+                <div className="card">
+                    <h2 className="text-xl font-bold text-center mb-2">Bem-vindo de volta</h2>
+                    <p className="text-sm text-center mb-6" style={{ color: "var(--color-text-secondary)" }}>
+                        Entre na sua conta para continuar
+                    </p>
+
+                    {actionData?.error && (
+                        <div
+                            className="mb-4 px-4 py-3 rounded-xl text-sm"
+                            style={{ background: "rgba(231,76,60,0.1)", color: "var(--color-danger)", border: "1px solid rgba(231,76,60,0.2)" }}
+                        >
+                            {actionData.error}
+                        </div>
+                    )}
+
+                    <Form method="post" className="space-y-4">
+                        <div>
+                            <label className="text-xs font-medium mb-1 block" style={{ color: "var(--color-text-secondary)" }}>
+                                Email
+                            </label>
+                            <div className="relative">
+                                <FiMail
+                                    className="absolute left-3 top-1/2 -translate-y-1/2"
+                                    size={16}
+                                    style={{ color: "var(--color-text-muted)" }}
+                                />
+                                <input
+                                    name="email"
+                                    type="email"
+                                    placeholder="seu@email.com"
+                                    required
+                                    style={{ paddingLeft: "2.5rem" }}
+                                />
+                            </div>
+                        </div>
+
+                        <div>
+                            <label className="text-xs font-medium mb-1 block" style={{ color: "var(--color-text-secondary)" }}>
+                                Password
+                            </label>
+                            <div className="relative">
+                                <FiLock
+                                    className="absolute left-3 top-1/2 -translate-y-1/2"
+                                    size={16}
+                                    style={{ color: "var(--color-text-muted)" }}
+                                />
+                                <input
+                                    name="password"
+                                    type="password"
+                                    placeholder="••••••••"
+                                    required
+                                    style={{ paddingLeft: "2.5rem" }}
+                                />
+                            </div>
+                        </div>
+
+                        <button type="submit" className="btn-primary w-full justify-center py-3">
+                            Entrar
+                        </button>
+                    </Form>
+
+                    <p className="text-sm text-center mt-6" style={{ color: "var(--color-text-secondary)" }}>
+                        Não tem conta?{" "}
+                        <Link to="/auth/register" className="font-medium">
+                            Criar conta
+                        </Link>
+                    </p>
+                </div>
+            </div>
+        </div>
+    );
+}
