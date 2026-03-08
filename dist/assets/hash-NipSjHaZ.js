@@ -1,0 +1,1 @@
+import{C as e}from"./index-B_aiHSsX.js";function n(o){const t=`${o.codigo}:${o.nome}:${o.origem}:${o.timestamp}`;return e.SHA256(t).toString()}function s(o){const t=`${o.productHash}:${o.estado}:${o.localizacao}:${o.timestamp}`;return e.SHA256(t).toString()}function i(o,t=8){return`${o.slice(0,t)}...${o.slice(-t)}`}export{s as a,n as g,i as s};

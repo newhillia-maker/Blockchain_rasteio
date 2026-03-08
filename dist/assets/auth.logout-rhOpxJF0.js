@@ -1,0 +1,1 @@
+import{v as t}from"./chunk-EPOLDU6W-DpEcwIXU.js";import{s as n}from"./supabase.client-B1Ci78pm.js";async function i(){return await n.auth.signOut(),t("/")}async function e(){return t("/")}export{i as clientAction,e as clientLoader};
